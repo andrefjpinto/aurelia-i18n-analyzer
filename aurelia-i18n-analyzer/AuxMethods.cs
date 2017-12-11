@@ -42,7 +42,7 @@ namespace aureliai18nanalyzer
             return paths;
         }
 
-        public static List<Locale> asd(JToken subLocale) {
+        public static List<Locale> GetJsonPaths(JToken subLocale) {
             List<Locale> resources = new List<Locale>();
 
             if (subLocale.HasValues == false)
@@ -53,12 +53,29 @@ namespace aureliai18nanalyzer
             else {
                 foreach (var itemdf in subLocale)
                 {
-                    var result = asd(itemdf);
+                    var result = GetJsonPaths(itemdf);
                     resources.AddRange(result);
                 }
 
                 return resources;
             }
+        }
+
+        public static bool DirectoryPathValidator(string path)
+        {
+            if (!Directory.Exists(path))
+            {
+                ConsoleExtension.WriteErrorLine("The path specified either doesn't exist or isn't valid. Please confirm that the path is an absolute path to a directory.");
+                return false;
+            }
+
+            if (!Path.IsPathRooted(path))
+            {
+                ConsoleExtension.WriteErrorLine("The path specified isn't an absolute path. Please confirm that the path is an absolute path to a directory.");
+                return false;
+            }
+
+            return true;
         }
     }
 }
