@@ -38,3 +38,5 @@ Thumbs.db
 
 # dotCover
 *.dotCover
+.vs/
+aurelia-i18n-analyzer/Properties/launchSettings.json
